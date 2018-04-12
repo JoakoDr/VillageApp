@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
 class VCRegister: UIViewController {
     
     @IBOutlet var txtEmail:UITextField?
@@ -17,11 +18,23 @@ class VCRegister: UIViewController {
     @IBOutlet var btnRegistro:UIButton?
     @IBOutlet var btnVolver:UIButton?
     @IBAction func eventoClickLogin()  {
-        if !((txtUser?.text?.isEmpty)! || (txtPassword?.text?.isEmpty)! || (txtPassword2?.text?.isEmpty)! || (txtEmail?.text?.isEmpty)!) {
+        //if !((txtUser?.text?.isEmpty)! || (txtPassword?.text?.isEmpty)! || (txtPassword2?.text?.isEmpty)! || (txtEmail?.text?.isEmpty)!) {
             if(txtPassword?.text == txtPassword2?.text ){
                 Auth.auth().createUser(withEmail: (txtEmail?.text)!, password: (txtPassword?.text)!){ (user, error) in
                     if (user != nil) {
                         print("Te Registraste !"+(user?.uid)!)
+                         DataHolder.sharedInstance.firestoreDB?.collection("perfiles").document((user?.uid)!).setData([
+                            "Nombre": "Pelayos de la presa",
+                            "Poblacion": 2000,
+                            "Provincia": "Madrid"
+                        ]) { err in
+                            if let err = err {
+                                print("Error adding document: \(err)")
+                            } else {
+                                print("Document added with ID:")
+                            }
+                        }
+
                         self.performSegue(withIdentifier: "transicionregistro", sender: self)
                     }else
                     {
@@ -32,7 +45,7 @@ class VCRegister: UIViewController {
                 
                 
             };
-        }
+        //}
         
     }
     

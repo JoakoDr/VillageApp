@@ -9,5 +9,19 @@
 import UIKit
 
 class pueblos: NSObject {
+    
+    var sNombre:String?
+    var sPoblacion:String?
+    var sProvincia:String?
+    var sImagen:UIImageView?
+    
+    
+    init(valores:[String:AnyObject]){
+        sNombre=valores["Nombre"] as! String
+        sPoblacion=valores["Poblacion"] as! String
+        sProvincia=valores["Provincia"] as! String
+        sImagen=valores["img"] as! UIImageView
+        
+    }
 
 }

@@ -20,6 +20,7 @@
 		9AADA05020767B77008C251D /* VCprincipal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AADA04F20767B77008C251D /* VCprincipal.swift */; };
 		9AADA05420767E7E008C251D /* CVcolection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AADA05320767E7E008C251D /* CVcolection.swift */; };
 		9ABA6E412073ACD40044DFBD /* VCRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ABA6E402073ACD40044DFBD /* VCRegister.swift */; };
+		A4B8964A207F411200D68F9C /* pueblos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B89649207F411200D68F9C /* pueblos.swift */; };
 		A4BC19AF207CA6C200865539 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A4BC19AE207CA6C200865539 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		9AADA04F20767B77008C251D /* VCprincipal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCprincipal.swift; sourceTree = "<group>"; };
 		9AADA05320767E7E008C251D /* CVcolection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVcolection.swift; sourceTree = "<group>"; };
 		9ABA6E402073ACD40044DFBD /* VCRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCRegister.swift; sourceTree = "<group>"; };
+		A4B89649207F411200D68F9C /* pueblos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pueblos.swift; sourceTree = "<group>"; };
 		A4BC19AE207CA6C200865539 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,6 +110,7 @@
 				9AADA04F20767B77008C251D /* VCprincipal.swift */,
 				9AADA05320767E7E008C251D /* CVcolection.swift */,
 				9A93A1E3207BEB05009F0EEB /* DataHolder.swift */,
+				A4B89649207F411200D68F9C /* pueblos.swift */,
 			);
 			path = rural;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				9A93A1E4207BEB05009F0EEB /* DataHolder.swift in Sources */,
 				9A4A3A732063B79600C2F232 /* rural.xcdatamodeld in Sources */,
 				9ABA6E412073ACD40044DFBD /* VCRegister.swift in Sources */,
+				A4B8964A207F411200D68F9C /* pueblos.swift in Sources */,
 				9A99F6982076406700FDF1D7 /* celdaPrototiopo.swift in Sources */,
 				9A99F6962076284500FDF1D7 /* tablas.swift in Sources */,
 				9AADA05420767E7E008C251D /* CVcolection.swift in Sources */,

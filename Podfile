@@ -12,4 +12,5 @@ target 'rural' do
  pod 'Firebase/Firestore'
  pod 'Firebase/Database'
  pod 'Firebase/Messaging'
+ pod 'Firebase/Storage'
 end

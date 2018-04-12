@@ -7,6 +7,8 @@
 //
 //-> return
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class tablas:
 UIViewController,UITableViewDelegate,UITableViewDataSource {
@@ -24,6 +26,35 @@ UIViewController,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet var tablas:UITableView?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        DataHolder.sharedInstance.firestoreDB?.collection("pueblos").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    
+                    
+                    
+                    print("\(document.documentID) => \(document.data())")
+                }
+            }
+        }
+       /*
+        DataHolder.sharedInstance.firDataBasRef.child("pueblos").observe(DataEventType.value, with: { (snapshot) in
+            var arTemp = snapshot.value as? Array<AnyObject>
+            let pueblos0=pueblos(valores : arTemp?[0] as! [String:AnyObject])
+            if(DataHolder.sharedInstance.arPueblos == nil){
+                //DataHolder.sharedInstance.arPueblos = Array<pueblos>
+            }
+            for co in arTemp! as [AnyObject]{
+                let puebloi = pueblos(valores: co as! [String:AnyObject])
+                DataHolder.sharedInstance.arPueblos?.append(puebloi)
+            }
+           // let coches0 = arTemp?[0] as? [String:AnyObject]
+        //print("lo descargado es: ",0)
+        })*/
+        
+        
 
         // Do any additional setup after loading the view.
     }
