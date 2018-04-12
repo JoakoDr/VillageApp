@@ -13,13 +13,19 @@ import FirebaseDatabase
 class tablas:
 UIViewController,UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Int(DataHolder.sharedInstance.numeroCeldas);
+        if(DataHolder.sharedInstance.arPueblos==nil){
+            return 0
+        }else{
+        
+        return (DataHolder.sharedInstance.arPueblos?.count)!
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let celda = tableView.dequeueReusableCell(withIdentifier: "idCelda") as! celdaPrototiopo
         celda.lblNombre?.text = DataHolder.sharedInstance.nombreCelda(numero: indexPath.row) as String
-
+        let puebloi:pueblos=DataHolder.sharedInstance.arPueblos![indexPath.row]
+        celda.lblNombre?.text=puebloi.sNombre
         return celda
     }
     
@@ -39,10 +45,11 @@ UIViewController,UITableViewDelegate,UITableViewDataSource {
                 }
             }
         }
-       /*
+        
+       
         DataHolder.sharedInstance.firDataBasRef.child("pueblos").observe(DataEventType.value, with: { (snapshot) in
-            var arTemp = snapshot.value as? Array<AnyObject>
-            let pueblos0=pueblos(valores : arTemp?[0] as! [String:AnyObject])
+            let arTemp = snapshot.value as? Array<AnyObject>
+            //let pueblos0=pueblos(valores : arTemp?[0] as! [String:AnyObject])
             if(DataHolder.sharedInstance.arPueblos == nil){
                 //DataHolder.sharedInstance.arPueblos = Array<pueblos>
             }
@@ -50,9 +57,11 @@ UIViewController,UITableViewDelegate,UITableViewDataSource {
                 let puebloi = pueblos(valores: co as! [String:AnyObject])
                 DataHolder.sharedInstance.arPueblos?.append(puebloi)
             }
+         
+         self.tablas?.reloadData()
            // let coches0 = arTemp?[0] as? [String:AnyObject]
         //print("lo descargado es: ",0)
-        })*/
+        })
         
         
 
