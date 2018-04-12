@@ -39,7 +39,8 @@ UIViewController,UITableViewDelegate,UITableViewDataSource {
             } else {
                 for document in querySnapshot!.documents {
                     
-                    
+                    let puebloi = pueblos(valores: document as! [String:AnyObject])
+                    DataHolder.sharedInstance.arPueblos?.append(puebloi)
                     
                     print("\(document.documentID) => \(document.data())")
                 }
@@ -47,21 +48,20 @@ UIViewController,UITableViewDelegate,UITableViewDataSource {
         }
         
        
-        DataHolder.sharedInstance.firDataBasRef.child("pueblos").observe(DataEventType.value, with: { (snapshot) in
-            let arTemp = snapshot.value as? Array<AnyObject>
+      // DataHolder.sharedInstance.firDataBasRef.child("pueblos").observe(DataEventType.value, with: { (snapshot) in
+           // let arTemp = snapshot.value as? Array<AnyObject>
             //let pueblos0=pueblos(valores : arTemp?[0] as! [String:AnyObject])
-            if(DataHolder.sharedInstance.arPueblos == nil){
+            //if(DataHolder.sharedInstance.arPueblos == nil){
                 //DataHolder.sharedInstance.arPueblos = Array<pueblos>
-            }
-            for co in arTemp! as [AnyObject]{
-                let puebloi = pueblos(valores: co as! [String:AnyObject])
-                DataHolder.sharedInstance.arPueblos?.append(puebloi)
-            }
+            //}
+            //for co in arTemp! as [AnyObject]{
+                
+            //}
          
-         self.tablas?.reloadData()
+       //  self.tablas?.reloadData()
            // let coches0 = arTemp?[0] as? [String:AnyObject]
         //print("lo descargado es: ",0)
-        })
+      //  })
         
         
 
