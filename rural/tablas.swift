@@ -13,27 +13,26 @@ import FirebaseDatabase
 class tablas:
 UIViewController,UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(DataHolder.sharedInstance.arPueblos==nil){
-            return 0
-        }else{
+        //if(DataHolder.sharedInstance.arPueblos==nil){
+          // return 0
+        //}else{
         
-        return (DataHolder.sharedInstance.arPueblos?.count)!
-        }
+        return self.arCiudades.count
+      // }
+    //}
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let celda = tableView.dequeueReusableCell(withIdentifier: "idCelda") as! celdaPrototiopo
-        celda.lblNombre?.text = DataHolder.sharedInstance.nombreCelda(numero: indexPath.row) as String
-        let puebloi:pueblos=DataHolder.sharedInstance.arPueblos![indexPath.row]
-        celda.lblNombre?.text=puebloi.sNombre
+        celda.lblNombre?.text = self.arCiudades[indexPath.row].sNombre
         return celda
     }
     
     @IBOutlet var tablas:UITableView?
+    var arCiudades:[pueblos] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        DataHolder.sharedInstance.firestoreDB?.collection("pueblos").getDocuments() { (querySnapshot, err) in
+        /*DataHolder.sharedInstance.firestoreDB?.collection("pueblos").getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
@@ -46,8 +45,22 @@ UIViewController,UITableViewDelegate,UITableViewDataSource {
                 }
             }
         }
-        
-       
+        */
+        DataHolder.sharedInstance.firestoreDB?.collection("pueblos").addSnapshotListener() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let pueblo:pueblos = pueblos()
+                    pueblo.sID=document.documentID
+                    pueblo.setMap(valores: document.data())
+                    self.arCiudades.append(pueblo)
+                    print("\(document.documentID) => \(document.data())")
+                }
+                self.refreshUI()
+            }
+            
+        }
       // DataHolder.sharedInstance.firDataBasRef.child("pueblos").observe(DataEventType.value, with: { (snapshot) in
            // let arTemp = snapshot.value as? Array<AnyObject>
             //let pueblos0=pueblos(valores : arTemp?[0] as! [String:AnyObject])
@@ -83,5 +96,8 @@ UIViewController,UITableViewDelegate,UITableViewDataSource {
         // Pass the selected object to the new view controller.
     }
     */
+    func refreshUI () {
+        DispatchQueue.main.async(execute:{self.tablas?.reloadData()})
+    }
 
 }

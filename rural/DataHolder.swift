@@ -26,28 +26,5 @@ class DataHolder: NSObject {
         firestoreDB=Firestore.firestore()
         firDataBasRef = Database.database().reference()
     }
-    func nombreCelda(numero:Int) -> NSString {
-        if numero == 0{
-            return  " San Martin"
-            
-        }
-        else if numero == 1{
-            return  " Monterrubio"
-            
-        }
-        else if numero == 2{
-            return  " Cercedilla"
-            
-        }
-        else if numero == 3{
-            return  " Los Molinos"
-            
-        }
-        else if numero == 4{
-            return  " Canalejas"
-            
-        }
-        return  " "
-   
-    }
+    
 }

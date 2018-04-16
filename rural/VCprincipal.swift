@@ -11,46 +11,36 @@ import UIKit
 class VCprincipal: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     @IBOutlet var coleccion: UICollectionView?
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Int(DataHolder.sharedInstance.numeroCeldas);
+         return self.arCiudades.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell:CVcolection = collectionView.dequeueReusableCell(withReuseIdentifier: "idcelda2", for: indexPath) as! CVcolection
-        if indexPath.row == 0{
-            cell.lblNombre?.text = " San Martin"
-            cell.imagen?.image = UIImage(named : "1.jpg")
-        }
-        else if indexPath.row == 1{
-            cell.lblNombre?.text = " Monterrubio"
-            cell.imagen?.image = UIImage(named : "2.jpg")
-        }
-        else if indexPath.row == 2{
-            cell.lblNombre?.text = " Cercedilla"
-            cell.imagen?.image = UIImage(named : "3.jpg")
-        }
-        else if indexPath.row == 3{
-            cell.lblNombre?.text = " Los molinos"
-            cell.imagen?.image = UIImage(named : "4.jpg")
-        }
-        else if indexPath.row == 4{
-            cell.lblNombre?.text = " Canalejas"
-            cell.imagen?.image = UIImage(named : "5.jpg")
-        }
-        else if indexPath.row == 5{
-            cell.lblNombre?.text = " "
-            
-        }
-        
+        cell.lblNombre?.text = arCiudades[indexPath.row].sNombre
         return cell
-      }
     
-    
-
+    }
+    var arCiudades:[pueblos] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        DataHolder.sharedInstance.firestoreDB?.collection("pueblos").addSnapshotListener() { (querySnapshot, err) in
+        if let err = err {
+            print("Error getting documents: \(err)")
+        } else {
+            for document in querySnapshot!.documents {
+                let pueblo:pueblos = pueblos()
+                pueblo.sID=document.documentID
+                pueblo.setMap(valores: document.data())
+                self.arCiudades.append(pueblo)
+                print("\(document.documentID) => \(document.data())")
+            }
+            self.refreshUI()
+        }
+        
     }
+    }
+        // Do any additional setup after loading the view.
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -68,4 +58,8 @@ class VCprincipal: UIViewController,UICollectionViewDelegate,UICollectionViewDat
     }
     */
 
-}
+        func refreshUI () {
+            DispatchQueue.main.async(execute:{self.coleccion?.reloadData()})
+        }
+    }
+

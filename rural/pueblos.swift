@@ -10,18 +10,34 @@ import UIKit
 
 class pueblos: NSObject {
     
+    let IDNombre = "Nombre"
+    let IDPoblacion = "Poblacion"
+    let IDProvincia = "Provincia"
+    //let IDImagen = "img"
+    
+    
+    var sID:String?
     var sNombre:String?
     var sPoblacion:String?
     var sProvincia:String?
-    var sImagen:UIImageView?
+    //var sImagen:UIImageView?
     
     
-    init(valores:[String:AnyObject]){
-        sNombre=valores["Nombre"] as! String
-        sPoblacion=valores["Poblacion"] as! String
-        sProvincia=valores["Provincia"] as! String
-        sImagen=valores["img"] as! UIImageView
+    func setMap(valores:[String:Any]){
+        sNombre=valores[IDNombre] as? String
+        sPoblacion=valores[IDPoblacion] as? String
+        sProvincia=valores[IDProvincia] as? String
+       // sImagen=(valores[IDImagen] as! UIImageView)
         
+    }
+    func getMap()->[String:Any]
+    {
+        return[
+            IDNombre: sNombre as Any,
+            IDPoblacion: sPoblacion as Any,
+            IDProvincia: sProvincia as Any,
+            //IDImagen: sImagen as Any
+        ]
     }
 
 }
